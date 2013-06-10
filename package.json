@@ -1,10 +1,10 @@
 {
   "author": "PushOk Software <support@pushok.com>",
-  "name": "tunguse",
+  "name": "tungus",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/sergeyksv/tingodb.git"
+    "url": "git://github.com/sergeyksv/tungus.git"
   },  
   "contributors": [
     {
@@ -12,7 +12,7 @@
       "email": "sergeyksv@gmail.com"
     } 
   ],  
-  "description": "Mongoose driver for TingoDB - embedded database",
+  "description": "Mongoose driver for TingoDB embedded database",
   "homepage": "http://www.tingodb.com",
   "keywords": [
     "database",
@@ -26,7 +26,8 @@
   },  
   "dependencies": {
     "safe": ">=0.0.9",
-    "lodash": ""
+    "lodash": "",
+    "mkdirp": ""
   },
   "scripts": {
   },
