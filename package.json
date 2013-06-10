@@ -27,7 +27,9 @@
   "dependencies": {
     "safe": ">=0.0.9",
     "lodash": "",
-    "mkdirp": ""
+    "mkdirp": "",
+    "tingodb": "",
+    "mongodb": ""
   },
   "scripts": {
   },
