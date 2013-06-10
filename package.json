@@ -1,7 +1,7 @@
 {
   "author": "PushOk Software <support@pushok.com>",
   "name": "tungus",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/sergeyksv/tungus.git"
@@ -18,7 +18,8 @@
     "database",
     "datastore",
     "embedded",
-    "mongoose"
+    "mongoose",
+    "tingodb"
   ],  
   "main": "./index.js",
   "engines": {
@@ -28,13 +29,13 @@
     "safe": ">=0.0.9",
     "lodash": "",
     "mkdirp": "",
-    "tingodb": "",
-    "mongodb": ""
+    "tingodb": ""
   },
   "scripts": {
+		"test":"mocha ./test/*.test.js"
   },
   "devDependencies": {
-	"mongoose": "",
+	"mongoose": "3.6.11",
 	"mocha":""
   }
 }
