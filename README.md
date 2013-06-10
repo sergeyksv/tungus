@@ -1,7 +1,8 @@
 Tungus
 ======
 
-This module implements mongoose.js driver API and allows to use mongoose with TingoDB (http://www.tingodb.com)
+This module implements mongoose.js driver API and allows to use mongoose with [TingoDB](http://www.tingodb.com).
+
 TingoDB is embedded Node.js database that is compatible with MongoDB on API level.
 
 So far this module is on its early stage with only basic functionality.
@@ -119,3 +120,6 @@ Full example:
 		})
 	  })
 	}
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/sergeyksv/tungus/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/b6cbaf6c8ba3c422361664a9df97ec80 "githalytics.com")](http://githalytics.com/sergeyksv/tungus)
