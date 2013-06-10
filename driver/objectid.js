@@ -1,4 +1,4 @@
-var ObjectId = require('tingodb')({nativeObjectID:true,searchInArray:true}).ObjectID;
+var ObjectId = require('./tingodb').ObjectID;
 
 var ObjectIdToString = ObjectId.toString.bind(ObjectId);
 module.exports = exports = ObjectId;

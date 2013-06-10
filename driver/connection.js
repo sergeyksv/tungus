@@ -3,7 +3,7 @@ var EventEmitter = require('events').EventEmitter
   , mkdirp = require('mkdirp')
   , safe = require('safe')
   , Collection = require('./collection.js')
-  , tingo = require('tingodb')({nativeObjectID:true,searchInArray:true})
+  , tingo = require('./tingodb')
   , Db = tingo.Db;
   
 function TingoConnection(base) {

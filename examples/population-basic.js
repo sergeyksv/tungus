@@ -50,6 +50,7 @@ function createData () {
     , manufacturer: 'Nintendo'
     , released: 'September 29, 1996'
   }, function (err, nintendo64) {
+	  console.log(nintendo64);
     if (err) return done(err);
 
     Game.create({
@@ -74,7 +75,6 @@ function example () {
   .populate('consoles')
   .exec(function (err, ocinara) {
     if (err) return done(err);
-    console.log(ocinara);
 
     console.log(
         '"%s" was released for the %s on %s'

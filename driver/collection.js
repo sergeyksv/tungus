@@ -1,4 +1,4 @@
-var Collection = require('tingodb')({nativeObjectID:true,searchInArray:true}).Collection;
+var Collection = require('./tingodb').Collection;
 
 function TingoCollection (name, conn, opts) {
   if (undefined === opts) opts = {};

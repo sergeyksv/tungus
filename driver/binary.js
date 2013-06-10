@@ -3,6 +3,6 @@
  * Module dependencies.
  */
 
-var Binary = require('tingodb')({nativeObjectID:true,searchInArray:true}).Binary;
+var Binary = require('./tingodb').Binary;
 
 module.exports = exports = Binary;
