@@ -4,26 +4,26 @@ Tungus
 This module implements mongoose.js driver API and allows to use mongoose with TingoDB (http://www.tingodb.com)
 TingoDB is embedded Node.js database that is compatible with MongoDB on API level.
 
-So far this module on its early stage but basic functionality is working.
+So far this module is on its early stage with only basic functionality.
 
 To use this module you have to install both tungus and mongoose.
 
-  npm install tungus
+	npm install tungus
 	npm install mongoose
 
 Then in your code you should include once tungus module prior to include of mongoose.
 This rewrites global.MONGOOSE_DRIVER_PATH variable to point it to tungus.
 
-  require('tungus')
+	require('tungus')
 	require('mongoose')
 
 Next to that you can keep using mongoose as usual except now it will accept different connection string:
 
-  mongoose.connect('tingodb:///some/local/folder')
+	mongoose.connect('tingodb:///some/local/folder')
   
 Full example:
 
-  var tungus = require('tungus');
+	var tungus = require('tungus');
 	var mongoose = require('mongoose')
 	var Schema = mongoose.Schema;
 
