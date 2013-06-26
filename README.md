@@ -1,4 +1,4 @@
-Tungus
+Tungus [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/sergeyksv/tungus/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 ======
 
 This module implements mongoose.js driver API and allows to use mongoose with TingoDB (http://www.tingodb.com)
