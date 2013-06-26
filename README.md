@@ -122,3 +122,4 @@ Full example:
 	}
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/sergeyksv/tungus/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/b6cbaf6c8ba3c422361664a9df97ec80 "githalytics.com")](http://githalytics.com/sergeyksv/tungus)
