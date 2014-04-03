@@ -54,8 +54,7 @@ Full example:
 	var Game = mongoose.model('Game', gameSchema);
 
 	/**
-	 * Connect to the console database on localhost with
-	 * the default port (27017)
+	 * Connect to the local tingo db file
 	 */
 
 	mongoose.connect('tingodb://'+__dirname+'/data', function (err) {
