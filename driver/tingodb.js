@@ -1,1 +1,6 @@
-module.exports = require('tingodb')({nativeObjectID:false,searchInArray:true})
+'use strict';
+
+module.exports = require('tingodb')(global.tingoDbOptions || {
+  nativeObjectID: false,
+  searchInArray: true
+});

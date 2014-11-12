@@ -5,13 +5,13 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/sergeyksv/tungus.git"
-  },  
+  },
   "contributors": [
     {
       "name": "Sergey Korotkov",
       "email": "sergeyksv@gmail.com"
-    } 
-  ],  
+    }
+  ],
   "description": "Mongoose driver for TingoDB embedded database",
   "homepage": "http://www.tingodb.com",
   "keywords": [
@@ -20,22 +20,23 @@
     "embedded",
     "mongoose",
     "tingodb"
-  ],  
+  ],
   "main": "./index.js",
   "engines": {
     "node": ">= v0.8.x"
-  },  
+  },
   "dependencies": {
     "safe": ">=0.0.9",
     "lodash": "",
     "mkdirp": "",
+    "mongodb": "",
     "tingodb": ""
   },
   "scripts": {
 		"test":"mocha ./test/*.test.js"
   },
   "devDependencies": {
-	"mongoose": "3.6.11",
-	"mocha":""
+	  "mongoose": "3.6.11",
+	  "mocha":""
   }
 }

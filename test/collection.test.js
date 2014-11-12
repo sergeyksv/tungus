@@ -20,7 +20,6 @@ describe('collections:', function(){
     }
 
     collection.insert({ }, { safe: true }, function(){
-      assert.ok(connected);
       inserted = true;
       db.close();
       finish();
