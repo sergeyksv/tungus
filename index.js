@@ -1,1 +1,3 @@
-global.MONGOOSE_DRIVER_PATH = __dirname + "/driver";
+'use strict';
+
+global.MONGOOSE_DRIVER_PATH = __dirname + '/driver';
