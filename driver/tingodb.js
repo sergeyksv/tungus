@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = require('tingodb')(global.tingoDbOptions || {
+module.exports = require('tingodb')(global.TUNGUS_DB_OPTIONS || {
   nativeObjectID: false,
   searchInArray: true
 });
