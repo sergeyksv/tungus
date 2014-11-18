@@ -1,9 +1,9 @@
 Tungus
 ======
 
-[![Build Status](https://travis-ci.org/sergeyksv/tungus.png?branch=master)](https://travis-ci.org/sergeyksv/tingodb)
-[![Deps Status](https://david-dm.org/sergeyksv/tungus.png)](https://david-dm.org/sergeyksv/tingodb)
-[![Dev deps Status](https://david-dm.org/sergeyksv/ttungus/dev-status.png)](https://david-dm.org/sergeyksv/tingodb)
+[![Build Status](https://travis-ci.org/sergeyksv/tungus.png?branch=master)](https://travis-ci.org/sergeyksv/tungus)
+[![Deps Status](https://david-dm.org/sergeyksv/tungus.png)](https://david-dm.org/sergeyksv/tungus)
+[![Dev deps Status](https://david-dm.org/sergeyksv/tungus/dev-status.png)](https://david-dm.org/sergeyksv/tungus)
 
 This module implements mongoose.js driver API and allows to use mongoose with [TingoDB](http://www.tingodb.com).
 
