@@ -25,6 +25,12 @@ This rewrites global.MONGOOSE_DRIVER_PATH variable to point it to tungus.
 Next to that you can keep using mongoose as usual except now it will accept different connection string:
 
 	mongoose.connect('tingodb:///some/local/folder')
+	
+Optionally you can set tingodb options using ```TUNGUS_DB_OPTIONS``` global variable. For example this way it is possible to switch to BSON.ObjectID ids which is default for mongodb.
+
+```
+global.TUNGUS_DB_OPTIONS =  { nativeObjectID: true, searchInArray: true };
+```
 
 Full example:
 
