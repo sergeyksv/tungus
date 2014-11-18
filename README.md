@@ -1,6 +1,10 @@
 Tungus
 ======
 
+[![Build Status](https://travis-ci.org/sergeyksv/tungus.png?branch=master)](https://travis-ci.org/sergeyksv/tingodb)
+[![Deps Status](https://david-dm.org/sergeyksv/tungus.png)](https://david-dm.org/sergeyksv/tingodb)
+[![Dev deps Status](https://david-dm.org/sergeyksv/ttungus/dev-status.png)](https://david-dm.org/sergeyksv/tingodb)
+
 This module implements mongoose.js driver API and allows to use mongoose with [TingoDB](http://www.tingodb.com).
 
 TingoDB is embedded Node.js database that is compatible with MongoDB on API level.
@@ -21,7 +25,7 @@ This rewrites global.MONGOOSE_DRIVER_PATH variable to point it to tungus.
 Next to that you can keep using mongoose as usual except now it will accept different connection string:
 
 	mongoose.connect('tingodb:///some/local/folder')
-  
+
 Full example:
 
 	var tungus = require('tungus');
