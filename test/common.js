@@ -1,6 +1,6 @@
 global.MONGOOSE_DRIVER_PATH = __dirname + "/../driver";
 process.env.MONGOOSE_TEST_URI = 'tingodb://'+__dirname+"/data";
-
+global.tingoDbOptions =  { nativeObjectID: true, searchInArray: true };
 
 /**
  * Module dependencies.

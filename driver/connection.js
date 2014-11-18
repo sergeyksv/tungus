@@ -35,7 +35,8 @@ TingoConnection.prototype.open = function(uri, cb) {
   if (!path) {
     throw new Error('Tungus support connection string format \'mongodb://{/path/to/valid/local/folder}\'');
   }
-  path = path[1];
+
+  path = path[2];
 
   this.emit('connecting');
 

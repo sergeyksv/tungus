@@ -330,7 +330,7 @@ describe('query stream:', function(){
     })
   })
 
-  it('supports population (gh-1411)', function(done){
+  it.skip('supports population (gh-1411)', function(done){
     var db = start();
 
     var barSchema = Schema({
