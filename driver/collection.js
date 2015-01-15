@@ -105,6 +105,10 @@ _.forOwn(Collection.prototype, function (value, key) {
       var collection = this.collection;
       var args = arguments;
 
+      if (typeof args['2'] === 'undefined') {
+        args['2'] = {};
+      }
+
       collection[key].apply(collection, args);
     };
 
