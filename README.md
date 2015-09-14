@@ -2,8 +2,8 @@ Tungus
 ======
 
 [![Build Status](https://travis-ci.org/sergeyksv/tungus.png?branch=master)](https://travis-ci.org/sergeyksv/tungus)
-[![Deps Status](https://david-dm.org/sergeyksv/tungus.png)](https://david-dm.org/sergeyksv/tungus)
-[![Dev deps Status](https://david-dm.org/sergeyksv/tungus/dev-status.png)](https://david-dm.org/sergeyksv/tungus)
+
+__Note! Currently driver support operation only with Mongoose 3.x. Mongoose 4.x uses API of MongoDb driver 2.x while TingoDB currently is compatible with 1.x API only. Please let us know if support of 4.x version is essential.__
 
 This module implements mongoose.js driver API and allows to use mongoose with [TingoDB](http://www.tingodb.com).
 
