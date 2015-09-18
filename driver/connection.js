@@ -11,6 +11,7 @@ function TingoConnection(base) {
   this.base = base;
   this.collections = {};
   this.models = {};
+  this.config = {};
 }
 
 TingoConnection.prototype.db = {};
