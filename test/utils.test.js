@@ -6,10 +6,10 @@
 var start = require('./common')
   , mongoose = start.mongoose
   , Schema = mongoose.Schema
-  , utils = require('../lib/utils')
-  , StateMachine = require('../lib/statemachine')
-  , ObjectId = require('../lib/types/objectid')
-  , MongooseBuffer = require('../lib/types/buffer')
+  , utils = require('mongoose/lib/utils')
+  , StateMachine = require('mongoose/lib/statemachine')
+  , ObjectId = require('mongoose/lib/types/objectid')
+  , MongooseBuffer = require('mongoose/lib/types/buffer')
   , ReadPref = mongoose.mongo.ReadPreference
   , assert = require('assert')
 

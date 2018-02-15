@@ -6,10 +6,10 @@
 var start = require('./common')
   , mongoose = start.mongoose
   , assert = require('assert')
-  , random = require('../lib/utils').random
+  , random = require('mongoose/lib/utils').random
   , Schema = mongoose.Schema
   , ObjectId = Schema.ObjectId
-  , Document = require('../lib/document')
+  , Document = require('mongoose/lib/document')
   , DocumentObjectId = mongoose.Types.ObjectId
   , SchemaType = mongoose.SchemaType
   , ValidatorError = SchemaType.ValidatorError
@@ -589,7 +589,7 @@ describe('document:', function(){
 
   describe('Errors', function(){
     it('MongooseErrors should be instances of Error (gh-209)', function(done){
-      var MongooseError = require('../lib/error')
+      var MongooseError = require('mongoose/lib/error')
         , err = new MongooseError("Some message");
       assert.ok(err instanceof Error);
       done();

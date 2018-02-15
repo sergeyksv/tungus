@@ -8,7 +8,7 @@ var start = require('./common')
   , assert = require('assert')
   , Schema = mongoose.Schema
   , ObjectId = Schema.ObjectId
-  , Document = require('../lib/document')
+  , Document = require('mongoose/lib/document')
   , DocumentObjectId = mongoose.Types.ObjectId;
 
 /**

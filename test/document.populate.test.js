@@ -6,11 +6,11 @@
 var start = require('./common')
   , assert = require('assert')
   , mongoose = start.mongoose
-  , utils = require('../lib/utils')
+  , utils = require('mongoose/lib/utils')
   , random = utils.random
   , Schema = mongoose.Schema
   , ObjectId = Schema.ObjectId
-  , Document = require('../lib/document')
+  , Document = require('mongoose/lib/document')
   , DocObjectId = mongoose.Types.ObjectId
 
 /**
