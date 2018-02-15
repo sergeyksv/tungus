@@ -1,4 +1,6 @@
-'use strict';
+/*!
+ * Module dependencies.
+ */
 
 var Binary = require('./tingodb').Binary;
 

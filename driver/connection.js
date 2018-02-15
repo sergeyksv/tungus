@@ -1,149 +1,97 @@
-'use strict';
+/*!
+ * Module dependencies.
+ */
 
-var EventEmitter = require('events').EventEmitter;
-var _ = require('lodash');
-var safe = require('safe');
-var Collection = require('./collection.js');
-var tingo = require('./tingodb');
-var Db = tingo.Db;
+ // TODO: implement useDb
 
-function TingoConnection(base) {
-  this.base = base;
-  this.collections = {};
-  this.models = {};
+ const MongooseConnection = require('mongoose/lib/connection');
+ const tingo = require('./tingodb');
+
+ const STATES = require('mongoose/lib/connectionstate');
+
+ const path = require('path');
+ const mkdirp = require('mkdirp');
+
+/**
+ * A [TingoDB](https://github.com/sergeyksv/tingodb) 'connection' implementation.
+ *
+ * @inherits Connection
+ * @api private
+ */
+
+function TingoConnection() {
+  MongooseConnection.apply(this, arguments);
 }
 
-TingoConnection.prototype.db = {};
+/*!
+ * Inherits from Connection.
+ */
 
-TingoConnection.prototype = Object.create(EventEmitter.prototype);
+TingoConnection.prototype.__proto__ = MongooseConnection.prototype;
 
-TingoConnection.prototype.collection = function(name, options) {
-  if (!(name in this.collections)) {
-    this.collections[name] = new Collection(name, this, options);
-  }
-  return this.collections[name];
-};
+/**
+ * Expose the possible connection states.
+ * @api public
+ */
 
-var dbs = {};
+TingoConnection.STATES = STATES;
 
-TingoConnection.prototype.open = function(uri, cb) {
-  var self = this;
-  cb = _.isFunction(cb) ? cb : function() {};
+/**
+ * Creates the TingoDB instance.
+ *
+ * @param {Function} fn
+ * @return {Connection} this
+ * @api private
+ */
 
-  var path = uri.match('(mongodb|tingodb)://(.*)');
-
-  if (!path) {
-    throw new Error('Tungus support connection string format \'mongodb://{/path/to/valid/local/folder}\'');
-  }
-
-  path = path[2];
-
-  this.emit('connecting');
-
-  if (!dbs[path]) {
-    dbs[path] = new Db(path, {});
+TingoConnection.prototype.doOpen = function (fn) {
+  if (this.hosts || this.replica) {
+    return this.doOpenSet(fn);
   }
 
-  this.emit('connected');
+  // Create DB folder, if it is not there yet..
+  let dbPath = path.join(this.host, this.name);
+  mkdirp.sync(dbPath);
 
-  this.db = dbs[path];
-
-  for (var i in this.collections) {
-    this.collections[i].onOpen();
-  }
-
-  safe.yield(function() {
-    cb();
-    self.emit('open');
-  });
+  this.db = new tingo.Db(path.join(dbPath), {});
+  fn(); // Emit all the onOpen()s
 
   return this;
-};
+}
 
-TingoConnection.prototype.close = function() {
-  var self = this;
-  var cb = arguments[arguments.length - 1];
-  cb = _.isFunction(cb) ? cb : function() {};
+TingoConnection.prototype.doOpenSet = function (fn) {
+  throw new Error('The TingoDB does not support replication.');
+}
 
-  safe.yield(function() {
-    cb();
-    self.emit('close');
-  });
+/**
+ * Closes the connection
+ *
+ * @param {Boolean} [force]
+ * @param {Function} [fn]
+ * @return {Connection} this
+ * @api private
+ */
+
+TingoConnection.prototype.doClose = function (force, fn) {
+  this.db.close(force, fn);
   return this;
-};
+}
 
-TingoConnection.prototype.model = function(name, schema, collection) {
-  var Schema = this.base.Schema;
-  var MongooseError = this.base.Error;
+/**
+ * Not implemented yet.
+ * Prepares default connection options for the TingoDB.
+ *
+ * _NOTE: `passed` options take precedence over connection string options._
+ *
+ * @param {Object} passed options that were passed directly during connection
+ * @param {Object} [connStrOptions] options that were passed in the connection string
+ * @api private
+ */
 
-  // collection name discovery
-  if ('string' === typeof schema) {
-    collection = schema;
-    schema = false;
-  }
-
-  if (_.isObject(schema) && !(schema instanceof Schema)) {
-    schema = new Schema(schema);
-  }
-
-  if (this.models[name] && !collection) {
-    // model exists but we are not subclassing with custom collection
-    if (schema instanceof Schema && schema !== this.models[name].schema) {
-      throw new MongooseError.OverwriteModelError(name);
-    }
-    return this.models[name];
-  }
-
-  var opts = {
-    cache: false,
-    connection: this
-  };
-  var model;
-
-  if (schema instanceof Schema) {
-    // compile a model
-    model = this.base.model(name, schema, collection, opts);
-
-    // only the first model with this name is cached to allow
-    // for one-offs with custom collection names etc.
-    if (!this.models[name]) {
-      this.models[name] = model;
-    }
-
-    model.init();
-    return model;
-  }
-
-  if (this.models[name] && collection) {
-    // subclassing current model with alternate collection
-    model = this.models[name];
-    schema = model.prototype.schema;
-    var sub = model.__subclass(this, schema, collection);
-    // do not cache the sub model
-    return sub;
-  }
-
-  // lookup model in mongoose module
-  model = this.base.models[name];
-
-  if (!model) {
-    throw new MongooseError.MissingSchemaError(name);
-  }
-
-  if (this === model.prototype.db && (!collection || collection === model.collection.name)) {
-    // model already uses this connection.
-
-    // only the first model with this name is cached to allow
-    // for one-offs with custom collection names etc.
-    if (!this.models[name]) {
-      this.models[name] = model;
-    }
-
-    return model;
-  }
-
-  this.models[name] = model.__subclass(this, schema, collection);
-  return this.models[name];
-};
+TingoConnection.prototype.parseOptions = function () {
+  // TODO: Implement me, some options might be supported by TingoDB...
+  // console.info('connection.parseOptions() is not implemented yet', arguments);
+  return {};
+}
 
 module.exports = TingoConnection;
