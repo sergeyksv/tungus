@@ -50,7 +50,7 @@ TingoConnection.prototype.doOpen = function (fn) {
   }
 
   // Create DB folder, if it is not there yet..
-  let dbPath = path.join(this.host, this.name);
+  let dbPath = path.join(this.host || '', this.name || '');
   mkdirp.sync(dbPath);
 
   this.db = new tingo.Db(path.join(dbPath), {});
