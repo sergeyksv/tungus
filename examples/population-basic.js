@@ -32,7 +32,8 @@ var Game = mongoose.model('Game', gameSchema);
  * the default port (27017)
  */
 
-mongoose.connect('tingodb://'+__dirname+'/data', function (err) {
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://data/test', { useMongoClient: false }, function (err) {
   // if we failed to connect, abort
   if (err) throw err;
 
