@@ -40,7 +40,7 @@
     "safe": "~0.4.x",
     "lodash": "~4.17.x",
     "mkdirp": "~0.5.x",
-    "tingodb": "~0.5.x",
+    "tingodb": "github:root-core/tingodb#fully_patched",
     "mongodb": "~3.0.x"
   },
   "scripts": {
