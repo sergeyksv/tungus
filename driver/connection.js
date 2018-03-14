@@ -37,29 +37,53 @@ TingoConnection.prototype.__proto__ = MongooseConnection.prototype;
 TingoConnection.STATES = STATES;
 
 /**
- * Creates the TingoDB instance.
- *
- * @param {Function} fn
- * @return {Connection} this
- * @api private
+ * Override the open() methods (mongoose 4.x)
+ * Override the openUri() method (mongoose 4.x, 5.0)
+ * @override
  */
 
-TingoConnection.prototype.doOpen = function (fn) {
-  if (this.hosts || this.replica) {
-    return this.doOpenSet(fn);
-  }
+TingoConnection.prototype._openWithoutPromise =
+TingoConnection.prototype.openUri =
+TingoConnection.prototype.open = function (uri, options, callback) {
+  return new Promise((resolve, reject) => {
+    this.uri = uri;
+    const handleFunc = (err) => {
+      if (err) {
+        if (!callback) {
+          // Error can be on same tick re: christkv/mongodb-core#157
+          setImmediate(() => this.emit('error', err));
+        }
+        reject(err);
+      }
+      else {
+        resolve();
+        this.onOpen(callback);
+      }
+      callback && callback(err);
+    };
 
-  // Create DB folder, if it is not there yet..
-  let dbPath = path.join(this.host || '', this.name || '');
-  mkdirp.sync(dbPath);
+    // TODO: Check if path valid on this file system
+    if (!uri.startsWith('mongodb://') && !uri.startsWith('tingodb://')) {
+      return handleFunc(`Uri "${uri}" is not valid!`);
+    }
 
-  this.db = new tingo.Db(path.join(dbPath), {});
-  fn(); // Emit all the onOpen()s
-
-  return this;
+    let dbPath = uri.substr(10);
+    mkdirp(dbPath, (err, made) => {
+      if (!err) {
+        this.db = new tingo.Db(dbPath, {});
+      }
+      handleFunc(err);
+    });
+  });
 }
 
-TingoConnection.prototype.doOpenSet = function (fn) {
+/**
+ * Throws if called, as replication is not supported.
+ * @override
+ * @throws
+ */
+TingoConnection.prototype._openSetWithoutPromise =
+TingoConnection.prototype.openSet = function () {
   throw new Error('The TingoDB does not support replication.');
 }
 
