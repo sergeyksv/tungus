@@ -18,114 +18,115 @@ To use this module you have to install both tungus and mongoose.
 
 Then in your code you should include once tungus module prior to include of mongoose.
 This rewrites global.MONGOOSE_DRIVER_PATH variable to point it to tungus.
-
-	require('tungus')
-	require('mongoose')
-
+```javascript
+require('tungus')
+require('mongoose')
+```
 Next to that you can keep using mongoose as usual except now it will accept different connection string:
-
-	mongoose.connect('tingodb:///some/local/folder')
-	
+```javascript
+mongoose.connect('tingodb:///some/local/folder')
+```	
 Optionally you can set tingodb options using ```TUNGUS_DB_OPTIONS``` global variable. For example this way it is possible to switch to BSON.ObjectID ids which is default for mongodb.
 
-```
+```javascript
 global.TUNGUS_DB_OPTIONS =  { nativeObjectID: true, searchInArray: true };
 ```
 
 Full example:
+```javascript
+var tungus = require('tungus');
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema;
 
-	var tungus = require('tungus');
-	var mongoose = require('mongoose')
-	var Schema = mongoose.Schema;
+console.log('Running mongoose version %s', mongoose.version);
 
-	console.log('Running mongoose version %s', mongoose.version);
+/**
+ * Console schema
+ */
 
-	/**
-	 * Console schema
-	 */
+var consoleSchema = Schema({
+	name: String
+  , manufacturer: String
+  , released: Date
+})
+var Console = mongoose.model('Console', consoleSchema);
 
-	var consoleSchema = Schema({
-		name: String
-	  , manufacturer: String
-	  , released: Date
+/**
+ * Game schema
+ */
+
+var gameSchema = Schema({
+	name: String
+  , developer: String
+  , released: Date
+  , consoles: [{ type: Schema.Types.ObjectId, ref: 'Console' }]
+})
+var Game = mongoose.model('Game', gameSchema);
+
+/**
+ * Connect to the local tingo db file
+ */
+
+mongoose.connect('tingodb://'+__dirname+'/data', function (err) {
+  // if we failed to connect, abort
+  if (err) throw err;
+
+  // we connected ok
+  createData();
+})
+
+/**
+ * Data generation
+ */
+
+function createData () {
+  Console.create({
+	  name: 'Nintendo 64'
+	, manufacturer: 'Nintendo'
+	, released: 'September 29, 1996'
+  }, function (err, nintendo64) {
+	if (err) return done(err);
+
+	Game.create({
+		name: 'Legend of Zelda: Ocarina of Time'
+	  , developer: 'Nintendo'
+	  , released: new Date('November 21, 1998')
+	  , consoles: [nintendo64]
+	}, function (err) {
+	  if (err) return done(err);
+	  example();
 	})
-	var Console = mongoose.model('Console', consoleSchema);
+  })
+}
 
-	/**
-	 * Game schema
-	 */
+/**
+ * Population
+ */
 
-	var gameSchema = Schema({
-		name: String
-	  , developer: String
-	  , released: Date
-	  , consoles: [{ type: Schema.Types.ObjectId, ref: 'Console' }]
+function example () {
+  Game
+  .findOne({ name: /^Legend of Zelda/ })
+  .populate('consoles')
+  .exec(function (err, ocinara) {
+	if (err) return done(err);
+	console.log(ocinara);
+
+	console.log(
+		'"%s" was released for the %s on %s'
+	  , ocinara.name
+	  , ocinara.consoles[0].name
+	  , ocinara.released.toLocaleDateString());
+
+	done();
+  })
+}
+
+function done (err) {
+  if (err) console.error(err);
+  Console.remove(function () {
+	Game.remove(function () {
+	  mongoose.disconnect();
 	})
-	var Game = mongoose.model('Game', gameSchema);
-
-	/**
-	 * Connect to the local tingo db file
-	 */
-
-	mongoose.connect('tingodb://'+__dirname+'/data', function (err) {
-	  // if we failed to connect, abort
-	  if (err) throw err;
-
-	  // we connected ok
-	  createData();
-	})
-
-	/**
-	 * Data generation
-	 */
-
-	function createData () {
-	  Console.create({
-		  name: 'Nintendo 64'
-		, manufacturer: 'Nintendo'
-		, released: 'September 29, 1996'
-	  }, function (err, nintendo64) {
-		if (err) return done(err);
-
-		Game.create({
-			name: 'Legend of Zelda: Ocarina of Time'
-		  , developer: 'Nintendo'
-		  , released: new Date('November 21, 1998')
-		  , consoles: [nintendo64]
-		}, function (err) {
-		  if (err) return done(err);
-		  example();
-		})
-	  })
-	}
-
-	/**
-	 * Population
-	 */
-
-	function example () {
-	  Game
-	  .findOne({ name: /^Legend of Zelda/ })
-	  .populate('consoles')
-	  .exec(function (err, ocinara) {
-		if (err) return done(err);
-		console.log(ocinara);
-
-		console.log(
-			'"%s" was released for the %s on %s'
-		  , ocinara.name
-		  , ocinara.consoles[0].name
-		  , ocinara.released.toLocaleDateString());
-
-		done();
-	  })
-	}
-
-	function done (err) {
-	  if (err) console.error(err);
-	  Console.remove(function () {
-		Game.remove(function () {
-		  mongoose.disconnect();
-		})
-	  })
-	}
+  })
+}
+```
