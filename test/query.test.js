@@ -4,12 +4,12 @@
  */
 
 var start = require('./common')
-  , Query = require('../lib/query')
+  , Query = require('mongoose/lib/query')
   , mongoose = start.mongoose
   , DocumentObjectId = mongoose.Types.ObjectId
   , Schema = mongoose.Schema
   , assert = require('assert')
-  , random = require('../lib/utils').random
+  , random = require('mongoose/lib/utils').random
 
 var Comment = new Schema({
     text: String

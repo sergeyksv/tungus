@@ -5,7 +5,7 @@
  */
 
 var assert = require('assert')
-var Promise = require('../lib/promise');
+var Promise = require('mongoose/lib/promise');
 
 /**
  * Test.

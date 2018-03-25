@@ -2,7 +2,7 @@
 var start = require('./common')
   , mongoose = start.mongoose
   , assert = require('assert')
-  , Collection = require('../lib/collection');
+  , Collection = require('mongoose/lib/collection');
 
 describe('collections:', function(){
   it('should buffer commands until connection is established', function(done){

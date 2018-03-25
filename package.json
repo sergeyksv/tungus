@@ -1,7 +1,7 @@
 {
   "author": "PushOk Software <support@pushok.com>",
   "name": "tungus",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/sergeyksv/tungus.git"
@@ -9,10 +9,21 @@
   "contributors": [
     {
       "name": "Sergey Korotkov",
-      "email": "sergeyksv@gmail.com"
+      "email": "sergeyksv@gmail.com",
+      "url": "pushok.com"
+    },
+    {
+      "name": "Fabian Arndt",
+      "email": "fabian.arndt@root-core.net",
+      "url": "root-core.net"
+    },
+    {
+      "name": "Andrej Gawrischenko",
+      "email": "andrej.gawrischenko@delphin.de",
+      "url": "delphin.de"
     }
   ],
-  "description": "Mongoose driver for TingoDB embedded database",
+  "description": "Mongoose 4.x driver for TingoDB embedded database",
   "homepage": "http://www.tingodb.com",
   "keywords": [
     "database",
@@ -26,17 +37,18 @@
     "node": ">= v0.8.x"
   },
   "dependencies": {
-    "safe": "~0.3.0",
-    "lodash": "~3.10.x",
-    "mkdirp": "~0.5.0",
-    "tingodb": "~0.4.1",
-    "mongodb": "1.4.x"
+    "lodash": "~4.17.x",
+    "mkdirp": "~0.5.x",
+    "mongodb": "^3.0.4",
+    "safe": "^0.4.6",
+    "tingodb": "~0.5.x"
   },
   "scripts": {
-		"test":"mocha ./test/*.test.js"
+    "test": "mocha ./test/*.test.js"
   },
   "devDependencies": {
-      "mocha":"1.21.x",
-      "mongoose": "3.6.x"
+    "mocha": "^5.0.4",
+    "mongoose": "^5.0.10",
+    "tungus": "."
   }
 }

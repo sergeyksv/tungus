@@ -6,7 +6,7 @@
 var start = require('./common')
   , mongoose = start.mongoose
   , assert = require('assert')
-  , random = require('../lib/utils').random
+  , random = require('mongoose/lib/utils').random
   , Schema = mongoose.Schema
 
 /**

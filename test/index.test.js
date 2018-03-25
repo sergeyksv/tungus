@@ -5,7 +5,7 @@ var url = require('url')
   , mongoose = start.mongoose
   , Mongoose = mongoose.Mongoose
   , Schema = mongoose.Schema
-  , random = require('../lib/utils').random
+  , random = require('mongoose/lib/utils').random
   , collection = 'blogposts_' + random();
 
 describe('mongoose module:', function(){
