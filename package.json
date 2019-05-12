@@ -26,17 +26,17 @@
     "node": ">= v0.8.x"
   },
   "dependencies": {
-    "safe": "~0.3.0",
-    "lodash": "~3.10.x",
+    "lodash": "~4.17.11",
     "mkdirp": "~0.5.0",
-    "tingodb": "~0.4.1",
-    "mongodb": "1.4.x"
+    "mongodb": "1.4.x",
+    "safe": "~0.3.0",
+    "tingodb": "~0.4.1"
   },
   "scripts": {
-		"test":"mocha ./test/*.test.js"
+    "test": "mocha ./test/*.test.js"
   },
   "devDependencies": {
-      "mocha":"1.21.x",
-      "mongoose": "3.6.x"
+    "mocha": "1.21.x",
+    "mongoose": "3.6.x"
   }
 }

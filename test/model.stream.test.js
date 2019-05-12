@@ -239,7 +239,7 @@ describe('query stream:', function(){
       assert.ok(/Adrian/.test(contents));
       assert.ok(/Aditya/.test(contents));
       assert.ok(/Agustin/.test(contents));
-      fs.unlink(filename);
+      fs.unlinkSync(filename);
       done();
     }
   })
